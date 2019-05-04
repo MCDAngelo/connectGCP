@@ -1,6 +1,10 @@
 ---
 title: "Connecting to Google Cloud Platform"
-output: ioslides_presentation
+output: 
+  ioslides_presentation:
+    css: www/theme.css
+    widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}

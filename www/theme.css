@@ -1,0 +1,70 @@
+.title-slide {
+  background-color: #FFFFFF /*#505050 #CBE7A5; #EDE0CF; #CA9F9D*/
+}
+
+slides > slide {
+  background: none;
+  background-color: white;
+}
+
+slides > slide > hgroup + article {
+  margin-top: 10px;
+}
+
+.title-slide hgroup > h1{
+  font-family: 'Oswald', 'Helvetica', sanserif; 
+  font-size: 60px;
+}
+
+.title-slide hgroup > h1, 
+.title-slide hgroup > h2 {
+  color: #505050 /*#F0F0F0 ; #EF5150*/
+} 
+
+.title-slide hgroup p {
+    margin-top: 0.5em;
+}
+
+article p, article li, article li.build, section p, section li{
+  text-align: left;
+}
+
+ul li {
+  margin-bottom: 0em;
+}
+
+code {
+  font-family: Consolas, "Courier New",monospace;
+  color: #006699;
+  font-weight: bolder;
+}
+
+pre {
+  padding:0px 0px 5px 60px;
+  line-height: 110%;
+  left: 60px;
+  width: 80%;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+pre code {
+  font-weight: 500;
+  font-size: 85%;
+  border-radius: 5px;
+  border: solid;
+  display: block;
+  padding: 0.2em;
+  border-color: darkgrey;
+  border-width: thin;
+  margin-left: 10px;
+  width: 90%
+}
+
+strong {
+  font-weight: bolder;
+}
+
+em {
+  font-style: italic
+}
