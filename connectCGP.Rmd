@@ -44,10 +44,25 @@ _lions and tigers and bears, oh my!_
 
 ## Authenticating with `bigrquery`
 
-![](images/pre_auth_01.png){ width=100% }
+To use `bigrquery` in a non-interactive session (i.e., when knitting a document), you will need to keep a local file to cache the access credentials.
 
-![](images/pre_auth_02.png){ width=100% }
+![](images/auth_01.png){ width=900px }
 
+
+## Authenticating with `bigrquery`
+
+![](images/auth_seq.png){ height=440px }
+
+
+
+## Authenticating with `bigrquery`
+
+
+![](images/auth_05.png){ width=600px }
+
+![](images/post_auth_02.png){ width=600px }
+
+![](images/post_auth_01.png){ width=600px }
 
 ## Creating & Uploading Tables
 
