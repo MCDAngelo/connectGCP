@@ -66,23 +66,23 @@ To use `bigrquery` in a non-interactive session (i.e., when knitting a document)
 
 ## Creating & Uploading Tables
 
-`bq_table()` - set up "bq_table" information
-`bq_table_exists()` - checks to see if table exists, returns `TRUE` or `FALSE`
-`bq_table_delete()` - deletes table
+- `bq_table()`: set up "bq_table" information  
+- `bq_table_exists()`: checks to see if table exists, returns `TRUE` or `FALSE`  
+- `bq_table_delete()`: deletes table  
 
 ```{r, echo=TRUE}
 library(bigrquery)
 #Generate data
 my_project <- "rational-photon-239401"
 my_dataset <- "test_dataset"
-my_table <- "iris"
+my_table <- "mtcars"
 
 #Set up BQ info
 my_bq_table_info <- bq_table(project = my_project,
                              dataset = my_dataset,
                              table = my_table)
 
-#If the table already exists, delete it, since we can't seem to append here
+#If the table already exists, delete it
 if (bq_table_exists(my_bq_table_info)){
   bq_table_delete(my_bq_table_info)
 }
@@ -90,15 +90,17 @@ if (bq_table_exists(my_bq_table_info)){
 
 ## Creating & Uploading Tables
 
-`bq_table_create()` - Creates the table
-`bq_table_upload()` - Uploads data; fields will create the schema from the dataframe
-`as_bq_fields()` - Convert df schema information into BQ fields
+- `bq_table_create()`: Creates the table
+- `bq_table_upload()`: Uploads data; fields will create the schema from the dataframe
+- `as_bq_fields()`: Convert df schema information into BQ fields
 
 ```{r, echo=TRUE}
 bq_table_create(my_bq_table_info)
 bq_table_upload(x = my_bq_table_info,
-                values = iris,
-                fields = as_bq_fields(iris))
+                values = mtcars,
+                fields = as_bq_fields(mtcars))
+
+as_bq_fields(mtcars)
 
 #Check if table exists
 bq_table_exists(my_bq_table_info)
@@ -107,8 +109,8 @@ bq_table_exists(my_bq_table_info)
 
 ## Downloading Tables
 
-`bq_project_query()` - Submits a query, waits for it to complete, and returns a "bq_table"
-`bq_table_download()` - Retrieves rows in chunks of `page_size` from tb (a "bq_table") 
+- `bq_project_query()`: Submits a query, waits for it to complete, and returns a "bq_table"
+- `bq_table_download()`: Retrieves rows in chunks of `page_size` from tb (a "bq_table") 
 
 ```{r cars, echo=TRUE, warning=FALSE, message=FALSE}
 library(dplyr)
@@ -116,7 +118,7 @@ library(glue)
 
 my_project <- "rational-photon-239401"
 my_dataset <- "test_dataset"
-my_table <- "iris"
+my_table <- "mtcars"
 
 sql <- glue("
     SELECT 

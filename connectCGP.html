@@ -79,12 +79,13 @@ slide:not(.current) .plotly.html-widget{
 
   </style>
 
+  <link href="data:text/css;charset=utf-8,%2Etitle%2Dslide%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%20%0A%7D%0Aslides%20%3E%20slide%20%7B%0Abackground%3A%20none%3B%0Abackground%2Dcolor%3A%20white%3B%0A%7D%0Aslides%20%3E%20slide%20%3E%20hgroup%20%2B%20article%20%7B%0Amargin%2Dtop%3A%2010px%3B%0A%7D%0A%2Etitle%2Dslide%20hgroup%20%3E%20h1%7B%0Afont%2Dfamily%3A%20%27Oswald%27%2C%20%27Helvetica%27%2C%20sanserif%3B%20font%2Dsize%3A%2060px%3B%0A%7D%0A%2Etitle%2Dslide%20hgroup%20%3E%20h1%2C%20%2Etitle%2Dslide%20hgroup%20%3E%20h2%20%7B%0Acolor%3A%20%23505050%20%0A%7D%20%2Etitle%2Dslide%20hgroup%20p%20%7B%0Amargin%2Dtop%3A%200%2E5em%3B%0A%7D%0Aarticle%20p%2C%20article%20li%2C%20article%20li%2Ebuild%2C%20section%20p%2C%20section%20li%7B%0Atext%2Dalign%3A%20left%3B%0A%7D%0Aul%20li%20%7B%0Amargin%2Dbottom%3A%200em%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20%22Courier%20New%22%2Cmonospace%3B%0Acolor%3A%20%23006699%3B%0Afont%2Dweight%3A%20bolder%3B%0A%7D%0Apre%20%7B%0Apadding%3A0px%200px%205px%2060px%3B%0Aline%2Dheight%3A%20110%25%3B%0Aleft%3A%2060px%3B%0Awidth%3A%2080%25%3B%0Amargin%2Dbottom%3A%205px%3B%0Amargin%2Dtop%3A%205px%3B%0A%7D%0Apre%20code%20%7B%0Afont%2Dweight%3A%20500%3B%0Afont%2Dsize%3A%2085%25%3B%0Aborder%2Dradius%3A%205px%3B%0Aborder%3A%20solid%3B%0Adisplay%3A%20block%3B%0Apadding%3A%200%2E2em%3B%0Aborder%2Dcolor%3A%20darkgrey%3B%0Aborder%2Dwidth%3A%20thin%3B%0Amargin%2Dleft%3A%2010px%3B%0Awidth%3A%2090%25%0A%7D%0Astrong%20%7B%0Afont%2Dweight%3A%20bolder%3B%0A%7D%0Aem%20%7B%0Afont%2Dstyle%3A%20italic%0A%7D%0A" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body style="opacity: 0">
 
-<slides>
+<slides class="layout-widescreen">
 
   <slide class="title-slide segue nobackground">
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
@@ -95,21 +96,20 @@ slide:not(.current) .plotly.html-widget{
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2>Outline</h2></hgroup><article  id="outline">
+<slide class=""><hgroup><h2>Outline</h2></hgroup><article  id="outline" class="smaller ">
 
 <h3>What is GCP?</h3>
 
 <ul>
 <li>Google Big Query</li>
 <li>Google Cloud Storage</li>
-<li>Helpful terminology</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Google Cloud Platform</h2></hgroup><article  id="google-cloud-platform">
+</article></slide><slide class=""><hgroup><h2>Google Cloud Platform</h2></hgroup><article  id="google-cloud-platform" class="smaller ">
 
 <img width="90%" src='images/gcp_homepage.png' title='fig:'/>
 
-</article></slide><slide class=""><hgroup><h2>Google Big Query</h2></hgroup><article  id="google-big-query">
+</article></slide><slide class=""><hgroup><h2>Google Big Query</h2></hgroup><article  id="google-big-query" class="smaller ">
 
 <p>Terminology</p>
 
@@ -123,7 +123,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p><em>lions and tigers and bears, oh my!</em></p>
 
-</article></slide><slide class=""><hgroup><h2><code>bigrquery</code> Package</h2></hgroup><article  id="bigrquery-package">
+</article></slide><slide class=""><hgroup><h2><code>bigrquery</code> Package</h2></hgroup><article  id="bigrquery-package" class="smaller ">
 
 <ul>
 <li>Authenticating</li>
@@ -132,53 +132,92 @@ slide:not(.current) .plotly.html-widget{
 <li>Notebooks vs. html?</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Creating &amp; Uploading Tables</h2></hgroup><article  id="creating-uploading-tables">
+</article></slide><slide class=""><hgroup><h2>Authenticating with <code>bigrquery</code></h2></hgroup><article  id="authenticating-with-bigrquery" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>#Generate data
+<p>To use <code>bigrquery</code> in a non-interactive session (i.e., when knitting a document), you will need to keep a local file to cache the access credentials.</p>
+
+<img width="900px" src='images/auth_01.png' title='fig:'/>
+
+</article></slide><slide class=""><hgroup><h2>Authenticating with <code>bigrquery</code></h2></hgroup><article  id="authenticating-with-bigrquery-1" class="smaller ">
+
+<img height="440px" src='images/auth_seq.png' title='fig:'/>
+
+</article></slide><slide class=""><hgroup><h2>Authenticating with <code>bigrquery</code></h2></hgroup><article  id="authenticating-with-bigrquery-2" class="smaller ">
+
+<img width="600px" src='images/auth_05.png' title='fig:'/>
+
+<img width="600px" src='images/post_auth_02.png' title='fig:'/>
+
+<img width="600px" src='images/post_auth_01.png' title='fig:'/>
+
+</article></slide><slide class=""><hgroup><h2>Creating &amp; Uploading Tables</h2></hgroup><article  id="creating-uploading-tables" class="smaller ">
+
+<ul>
+<li><code>bq_table()</code>: set up &quot;bq_table&quot; information<br/></li>
+<li><code>bq_table_exists()</code>: checks to see if table exists, returns <code>TRUE</code> or <code>FALSE</code><br/></li>
+<li><code>bq_table_delete()</code>: deletes table</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>library(bigrquery)
+#Generate data
 my_project &lt;- &quot;rational-photon-239401&quot;
 my_dataset &lt;- &quot;test_dataset&quot;
 my_table &lt;- &quot;mtcars&quot;
 
 #Set up BQ info
-my_bq_table_info &lt;- bigrquery::bq_table(project = my_project,
-                          dataset = my_dataset,
-                          table = my_table)
+my_bq_table_info &lt;- bq_table(project = my_project,
+                             dataset = my_dataset,
+                             table = my_table)
 
-#If the table already exists, delete it, since we can&#39;t seem to append here
-if (bigrquery::bq_table_exists(my_bq_table_info)){
-  bigrquery::bq_table_delete(my_bq_table_info)
+#If the table already exists, delete it
+if (bq_table_exists(my_bq_table_info)){
+  bq_table_delete(my_bq_table_info)
 }</pre>
 
-</article></slide><slide class=""><hgroup><h2>Creating &amp; Uploading Tables</h2></hgroup><article  id="creating-uploading-tables-1">
+</article></slide><slide class=""><hgroup><h2>Creating &amp; Uploading Tables</h2></hgroup><article  id="creating-uploading-tables-1" class="smaller ">
 
-<pre class = 'prettyprint lang-r'>#Create the table
-bigrquery::bq_table_create(my_bq_table_info)</pre>
+<ul>
+<li><code>bq_table_create()</code>: Creates the table</li>
+<li><code>bq_table_upload()</code>: Uploads data; fields will create the schema from the dataframe</li>
+<li><code>as_bq_fields()</code>: Convert df schema information into BQ fields</li>
+</ul>
+
+<pre class = 'prettyprint lang-r'>bq_table_create(my_bq_table_info)</pre>
 
 <pre >## &lt;bq_table&gt; rational-photon-239401.test_dataset.mtcars</pre>
 
-<pre class = 'prettyprint lang-r'>#Upload data; fields will create the schema from the dataframe
-bigrquery::bq_table_upload(x = my_bq_table_info,
-                           values = mtcars,
-                           fields = bigrquery::as_bq_fields(mtcars))
+<pre class = 'prettyprint lang-r'>bq_table_upload(x = my_bq_table_info,
+                values = mtcars,
+                fields = as_bq_fields(mtcars))
 
-#Check if table exists
-bigrquery::bq_table_exists(my_bq_table_info)</pre>
+as_bq_fields(mtcars)</pre>
+
+<pre >## &lt;bq_fields&gt;
+##   mpg &lt;FLOAT&gt;
+##   cyl &lt;FLOAT&gt;
+##   disp &lt;FLOAT&gt;
+##   hp &lt;FLOAT&gt;
+##   drat &lt;FLOAT&gt;
+##   wt &lt;FLOAT&gt;
+##   qsec &lt;FLOAT&gt;
+##   vs &lt;FLOAT&gt;
+##   am &lt;FLOAT&gt;
+##   gear &lt;FLOAT&gt;
+##   carb &lt;FLOAT&gt;</pre>
+
+<pre class = 'prettyprint lang-r'>#Check if table exists
+bq_table_exists(my_bq_table_info)</pre>
 
 <pre >## [1] TRUE</pre>
 
-</article></slide><slide class=""><hgroup><h2><code>googleCloudStorageR</code> Package</h2></hgroup><article  id="googlecloudstorager-package">
+</article></slide><slide class=""><hgroup><h2>Downloading Tables</h2></hgroup><article  id="downloading-tables" class="smaller ">
 
 <ul>
-<li>Authenticating</li>
-<li>Downloading</li>
-<li>Uploading</li>
-<li>Notebooks vs. html?</li>
+<li><code>bq_project_query()</code>: Submits a query, waits for it to complete, and returns a &quot;bq_table&quot;</li>
+<li><code>bq_table_download()</code>: Retrieves rows in chunks of <code>page_size</code> from tb (a &quot;bq_table&quot;)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Slide with R Output</h2></hgroup><article  id="slide-with-r-output">
-
 <pre class = 'prettyprint lang-r'>library(dplyr)
-library(bigrquery)
 library(glue)
 
 my_project &lt;- &quot;rational-photon-239401&quot;
@@ -192,9 +231,7 @@ sql &lt;- glue(&quot;
       `{my_project}.{my_dataset}.{my_table}`
     &quot;)
 
-# Submits a query, waits for it to complete, and returns a &quot;bq_table&quot;
 tb &lt;- bq_project_query(my_project, sql)
-# Retrieves rows in chunks of `page_size` from tb (a &quot;bq_table&quot;) 
 bq_eg_df &lt;- bq_table_download(tb)
 
 bq_eg_df %&gt;% head()</pre>
@@ -207,7 +244,16 @@ bq_eg_df %&gt;% head()</pre>
 ## 3  21.5     4  120.    97  3.7   2.46  20.0     1     0     3     1
 ## 4  21.4     6  258    110  3.08  3.22  19.4     1     0     3     1
 ## 5  18.1     6  225    105  2.76  3.46  20.2     1     0     3     1
-## 6  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</pre></article></slide>
+## 6  19.2     6  168.   123  3.92  3.44  18.3     1     0     4     4</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>googleCloudStorageR</code> Package</h2></hgroup><article  id="googlecloudstorager-package" class="smaller ">
+
+<ul>
+<li>Authenticating</li>
+<li>Downloading</li>
+<li>Uploading</li>
+<li>Notebooks vs. html?</li>
+</ul></article></slide>
 
 
   <slide class="backdrop"></slide>
