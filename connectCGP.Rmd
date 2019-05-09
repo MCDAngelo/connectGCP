@@ -1,5 +1,7 @@
 ---
-title: "Connecting to Google Cloud Platform"
+title: Connecting to Google Cloud Platform
+subtitle: Maria C. D'Angelo, PhD
+author: Senior Data Scientist, Delphia Inc
 output: 
   ioslides_presentation:
     css: www/theme.css
@@ -8,19 +10,22 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 ```
-
-## Outline
-
-### What is GCP?
-- Google Big Query
-- Google Cloud Storage
 
 
 ## Google Cloud Platform
 
 ![](images/gcp_homepage.png){ width=90% }
+
+## Google Cloud Platform
+
+Today I'll be focusing on interacting with  two parts of Google Cloud Platform using R:   
+
+- Google Cloud Storage using the `googleCloudStorageR` package 
+
+- BigQuery using the `bigrquery` package  
+ 
 
 
 ## Google Big Query
