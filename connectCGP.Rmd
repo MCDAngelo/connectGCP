@@ -26,6 +26,139 @@ Today I'll be focusing on interacting with  two parts of Google Cloud Platform u
 
 - BigQuery using the `bigrquery` package  
  
+ **ADD SIMILARITIES/DIFFS/ OVERVIEW here**
+ 
+
+## `googleCloudStorageR` Package
+
+*screen shot
+
+- Authenticating
+- Listing buckets
+- Downloading objects
+- Uploading objects
+
+
+## Authenticating with `googleCloudStorageR`
+
+I found this slightly confusing because two different authentication files are mentioned in the documentation. You only need the first of these two for local R sessions.
+
+1. One file sets up credentials for auto-authentication (`gcs-auto-auth.json`)
+2. One file sets up a client ID for an application (`client-id.json`)  
+- Sets up which app you are going to authenticate with (e.g. a Shiny App)
+
+
+I'll only show how to set up the credentials for auto-authentication here
+
+https://github.com/cloudyr/googleCloudStorageR/issues/94
+
+
+## Authenticating with `googleCloudStorageR` - auto-authentication
+
+![](images/gcs_auth_11.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR` - auto-authentication
+
+Create service account and prompted to download .json file 
+I've named it `gcs-auto-auth.json`
+
+![](images/gcs_auth_12.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR`
+
+
+
+```{r}
+# Authenticate service account
+Sys.setenv("GCS_AUTH_FILE" = "gcs-auto-auth.json")
+library(googleCloudStorageR)
+# gcs_auth()
+```
+
+
+## Inspecting Buckets
+
+- `gcs_list_buckets`: will return a data frame containing the following information for each object in a bucket: name, storage class, location, and date the object was last updated
+
+```{r}
+## get your project name from the API console
+my_project <- "rational-photon-239401"
+## get bucket
+buckets <- gcs_list_buckets(my_project)
+buckets
+```
+
+## Inspecting Buckets
+
+- `gcs_get_bucket`: will return meta data for a bucket
+
+```{r}
+gcs_get_bucket(buckets$name[[1]])
+```
+
+## Creating Buckets
+
+- `gcs_create_bucket()`: will create a bucket in your project with a specified location and storage class
+
+```{r}
+new_bucket_name <- "mcd_test_bucket2"
+gcs_create_bucket(new_bucket_name, projectId = my_project,
+                  location = "EU", storageClass = "MULTI_REGIONAL")
+
+## get bucket
+gcs_list_buckets(my_project)
+```
+
+
+## Uploading Objects to Buckets
+
+- `gcs_upload()`: will upload file to the specified bucket
+
+```{r}
+## Can specify a file or data frames are converted to csv by default
+gcs_upload(mtcars, bucket = new_bucket_name)
+```
+
+
+## Downloading Objects
+
+- `gcs_list_objects()`: will list objects in a specified bucket
+
+
+```{r}
+buckets <- gcs_list_buckets(my_project)
+buckets
+(objects <- gcs_list_objects(bucket = buckets$name[[2]]))
+```
+
+## Downloading Objects
+
+- `gcs_get_object()`: Will download an object directly, can save directly to disk if `saveToDisk = TRUE`
+
+
+```{r, warning=FALSE, message=FALSE}
+gcs_eg_df <- gcs_get_object(object = objects$name[[1]],
+                            bucket = buckets$name[[2]])
+
+gcs_eg_df %>% head()
+```
+
+## Deleting Objects and Buckets
+
+- `gcs_delete_object()`: will delete an object in a specified bucket
+- `gcs_delete_bucket()`: will delete a bucket in your project *Note: you cannot delete buckets that contain objects
+
+
+```{r}
+if(new_bucket_name %in% buckets$name){
+  obj_to_delete <- gcs_list_objects(bucket = new_bucket_name)
+  gcs_delete_object(object_name = obj_to_delete$name[[1]], 
+                    bucket = new_bucket_name)
+  gcs_delete_bucket(new_bucket_name)
+}
+```
 
 
 ## Google Big Query
@@ -36,46 +169,88 @@ Terminology
 - **Dataset** 
 - **Table**
 
-![](images/dorothy.jpg){ width=50% }
+![](images/bigrquery_terms.png#center){ height=350px }
 
-_lions and tigers and bears, oh my!_
+## Google Big Query
+
+Terminology 
+
+- **Project** 
+- **Dataset** 
+- **Table**
+
+![_lions and tigers and bears, oh my!_](images/dorothy.jpg#center){ width=70% }
 
 
-## `bigrquery` Package
+
+
+## Google Big Query
+
+Terminology 
+
+- **Project**: `rational-photon-239401` (My First Project) 
+- **Dataset**: `test_dataset`
+- **Table**: `mtcars`
+
+![](images/gcp_bq.png#center){ width=90% }
+
+
+## `bigrquery` Package 
+
 - Authenticating
 - Uploading
-- Downloading
-- Notebooks vs. html?
+- Downloading  
+    - Low-level API  
+    - `DBI` interface  
+    - `dplyr` interface  
 
 ## Authenticating with `bigrquery`
 
-To use `bigrquery` in a non-interactive session (i.e., when knitting a document), you will need to keep a local file to cache the access credentials.
+- When you run your first command with `bigrquery`, you will be prompted to authenticate
+
+- Note: to use `bigrquery` in a non-interactive session (i.e., when knitting a document like this presentation), you will need to keep a local file to cache the access credentials. (Select 1 below)
+
 
 ![](images/auth_01.png){ width=900px }
 
 
+## Authenticating with `bigrquery` {.columns-3 .build}
+
+
+![](images/auth_02.png){ width=350px }
+![](images/auth_03.png){ width=350px }
+![](images/auth_04.png){ width=350px }
+
+
+
 ## Authenticating with `bigrquery`
 
-![](images/auth_seq.png){ height=440px }
 
+![](images/auth_05.png#center){ width=900px }
 
 
 ## Authenticating with `bigrquery`
 
 
-![](images/auth_05.png){ width=600px }
+![](images/post_auth_02.png#center){ width=900px }
 
-![](images/post_auth_02.png){ width=600px }
+  
+<!-- ![](images/post_auth_01.png#center){ width=900px } -->
 
-![](images/post_auth_01.png){ width=600px }
+## Authenticating with `bigrquery`
 
-## Creating & Uploading Tables
+```{bash}
+more .gitignore
+```
+
+
+
+## Creating & Uploading Tables 
 
 - `bq_table()`: set up "bq_table" information  
 - `bq_table_exists()`: checks to see if table exists, returns `TRUE` or `FALSE`  
-- `bq_table_delete()`: deletes table  
 
-```{r, echo=TRUE}
+```{r}
 library(bigrquery)
 #Generate data
 my_project <- "rational-photon-239401"
@@ -86,30 +261,31 @@ my_table <- "mtcars"
 my_bq_table_info <- bq_table(project = my_project,
                              dataset = my_dataset,
                              table = my_table)
-
-#If the table already exists, delete it
-if (bq_table_exists(my_bq_table_info)){
-  bq_table_delete(my_bq_table_info)
-}
 ```
 
 ## Creating & Uploading Tables
 
 - `bq_table_create()`: Creates the table
-- `bq_table_upload()`: Uploads data; fields will create the schema from the dataframe
-- `as_bq_fields()`: Convert df schema information into BQ fields
+- `bq_table_upload()`: Uploads data; fields will create the schema from the data frame
 
-```{r, echo=TRUE}
+```{r}
 bq_table_create(my_bq_table_info)
 bq_table_upload(x = my_bq_table_info,
                 values = mtcars,
                 fields = as_bq_fields(mtcars))
 
-as_bq_fields(mtcars)
-
 #Check if table exists
 bq_table_exists(my_bq_table_info)
 ```
+
+## Creating & Uploading Tables
+
+- `as_bq_fields()`: Convert df schema information into BQ fields
+
+```{r}
+as_bq_fields(mtcars)
+```
+
 
 
 ## Downloading Tables
@@ -117,7 +293,7 @@ bq_table_exists(my_bq_table_info)
 - `bq_project_query()`: Submits a query, waits for it to complete, and returns a "bq_table"
 - `bq_table_download()`: Retrieves rows in chunks of `page_size` from tb (a "bq_table") 
 
-```{r cars, echo=TRUE, warning=FALSE, message=FALSE}
+```{r cars, warning=FALSE, message=FALSE}
 library(dplyr)
 library(glue)
 
@@ -125,12 +301,7 @@ my_project <- "rational-photon-239401"
 my_dataset <- "test_dataset"
 my_table <- "mtcars"
 
-sql <- glue("
-    SELECT 
-      * 
-    FROM
-      `{my_project}.{my_dataset}.{my_table}`
-    ")
+sql <- glue("SELECT * FROM `{my_project}.{my_dataset}.{my_table}`")
 
 tb <- bq_project_query(my_project, sql)
 bq_eg_df <- bq_table_download(tb)
@@ -139,8 +310,106 @@ bq_eg_df %>% head()
 
 ```
 
-## `googleCloudStorageR` Package
-- Authenticating
-- Downloading
-- Uploading
-- Notebooks vs. html?
+
+## `DBI` Interface
+
+- `DBI::dbConnect()`: connect to BigQuery like any other database, only need to supply your project name
+- `DBI::dbGetQuery()`: using the connection, execute the query provided
+- `DBI::dbReadTable()`, `DBI::dbWriteTable()`: Read and write tables
+
+```{r}
+sql <- glue("SELECT * FROM `{my_project}.{my_dataset}.{my_table}`")
+
+con <- DBI::dbConnect(bigquery(), project = my_project)
+dbi_eg_df <- DBI::dbGetQuery(con, sql)
+DBI::dbDisconnect(con)
+dbi_eg_df %>% head()
+```
+
+## `dplyr` Interface
+
+- `dplyr::tbl()`: create a table from a data source (here: BigQuery)
+
+```{r}
+con <- DBI::dbConnect(bigrquery::bigquery(), project = my_project)
+dbi_eg_df2 <- dplyr::tbl(con, glue("{my_dataset}.{my_table}"))
+DBI::dbDisconnect(con)
+dbi_eg_df2 %>% head()
+```
+
+## `dbplyr` Interface
+
+*Screen shot?
+
+## Deleting Tables 
+
+- `bq_table_exists()`: checks to see if table exists, returns `TRUE` or `FALSE`  
+- `bq_table_delete()`: deletes table  
+
+```{r}
+#If the table already exists, delete it
+if (bq_table_exists(my_bq_table_info)){
+  bq_table_delete(my_bq_table_info)
+}
+```
+
+
+## Thank you! {.vcenter}
+
+
+Any Questions? 
+
+Connect with me on Twitter! @mariacdangelo
+
+
+
+## 
+
+
+
+## Authenticating with `googleCloudStorageR`
+
+![](images/gcs_auth_01.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR` - client ID
+
+![](images/gcs_auth_03.png#center){ width=900px }
+
+## Authenticating with `googleCloudStorageR` - client ID
+
+![](images/gcs_auth_04.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR` - client ID
+
+![](images/gcs_auth_06.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR` - client ID
+
+Create a client ID and download .json file (icon on far right)
+I've named it `client-id.json`
+
+![](images/gcs_auth_07.png#center){ width=900px }
+
+
+## Authenticating with `googleCloudStorageR` - client ID
+
+
+To authenticate the client ID run the following code:
+
+```{r gcs_auth_client, eval=FALSE}
+scope = "https://www.googleapis.com/auth/cloud-platform"
+
+# Authenticate ClientID
+googleAuthR::gar_set_client("client-id.json", scopes = scope)
+```
+
+
+## Authenticating with `googleCloudStorageR` - client ID{.columns-3}
+
+![](images/gcs_auth_08.png){ width=350px }
+![](images/gcs_auth_09.png){ width=350px }
+
+![](images/gcs_auth_10.png){ width=350px }

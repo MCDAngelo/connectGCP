@@ -4,3 +4,5 @@
 .Ruserdata
 .DS_Store
 .httr-oauth
+gcs-auto-auth.json
+client-id.json
