@@ -109,6 +109,8 @@ slide:not(.current) .plotly.html-widget{
 
 <img width="90%" src='images/gcp_homepage.png' title='fig:'/>
 
+<p>Follow along at: <a href='https://github.com/MCDAngelo/connectGCP' title=''>https://github.com/MCDAngelo/connectGCP</a></p>
+
 </article></slide><slide class=""><hgroup><h2>Google Cloud Platform</h2></hgroup><article  id="google-cloud-platform-1" class="smaller build">
 
 <p>Today I&#39;ll be focusing two parts of Google Cloud Platform that I&#39;ve used to access data: Google Cloud Storage and BigQuery</p>
@@ -293,15 +295,15 @@ buckets</pre>
 <pre class = 'prettyprint lang-r'>new_bucket_name &lt;- &quot;rladies_example&quot;
 gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&quot;)</pre>
 
-<pre >## 2019-05-09 16:10:36 -- Bucket created successfully:rladies_example in EU</pre>
+<pre >## 2019-05-09 16:23:03 -- Bucket created successfully:rladies_example in EU</pre>
 
 <pre >## ==Google Cloud Storage Bucket==
 ## Bucket:          rladies_example 
 ## Project Number:  826624791147 
 ## Location:        EU 
 ## Class:           MULTI_REGIONAL 
-## Created:         2019-05-09 20:10:43 
-## Updated:         2019-05-09 20:10:43 
+## Created:         2019-05-09 20:23:10 
+## Updated:         2019-05-09 20:23:10 
 ## Versioning:      FALSE 
 ## Meta-generation: 1 
 ## eTag:            CAE=</pre>
@@ -310,7 +312,7 @@ gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&q
 
 <pre >##              name   storageClass location             updated
 ## 1 mcd_test_bucket MULTI_REGIONAL       EU 2019-05-08 17:57:12
-## 2 rladies_example MULTI_REGIONAL       EU 2019-05-09 20:10:43</pre>
+## 2 rladies_example MULTI_REGIONAL       EU 2019-05-09 20:23:10</pre>
 
 </article></slide><slide class=""><hgroup><h2>⬆️ Uploading Objects to Buckets</h2></hgroup><article  id="uploading-objects-to-buckets" class="smaller ">
 
@@ -322,24 +324,24 @@ gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&q
 <pre class = 'prettyprint lang-r'>buckets &lt;- gcs_list_buckets(my_project)
 gcs_upload(iris, bucket = buckets$name[[2]])</pre>
 
-<pre >## 2019-05-09 16:10:36 -- File size detected as 4.7 Kb</pre>
+<pre >## 2019-05-09 16:23:04 -- File size detected as 4.7 Kb</pre>
 
 <pre >## ==Google Cloud Storage Object==
 ## Name:                iris.csv 
 ## Type:                text/csv 
 ## Size:                4.7 Kb 
-## Media URL:           https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557432645147248&amp;alt=media 
+## Media URL:           https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557433392904290&amp;alt=media 
 ## Download URL:        https://storage.cloud.google.com/rladies_example/iris.csv 
 ## Public Download URL: https://storage.googleapis.com/rladies_example/iris.csv 
 ## Bucket:              rladies_example 
-## ID:                  rladies_example/iris.csv/1557432645147248 
+## ID:                  rladies_example/iris.csv/1557433392904290 
 ## MD5 Hash:            iFpB0GOnkjro0OhATZKRow== 
 ## Class:               MULTI_REGIONAL 
-## Created:             2019-05-09 20:10:45 
-## Updated:             2019-05-09 20:10:45 
-## Generation:          1557432645147248 
+## Created:             2019-05-09 20:23:12 
+## Updated:             2019-05-09 20:23:12 
+## Generation:          1557433392904290 
 ## Meta Generation:     1 
-## eTag:                CPC0zdygj+ICEAE= 
+## eTag:                COLwlMGjj+ICEAE= 
 ## crc32c:              c+bZLQ==</pre>
 
 </article></slide><slide class=""><hgroup><h2>🗃 Listing Objects</h2></hgroup><article  id="listing-objects" class="smaller ">
@@ -351,19 +353,19 @@ gcs_upload(iris, bucket = buckets$name[[2]])</pre>
 <pre class = 'prettyprint lang-r'>(objects &lt;- gcs_list_objects(bucket = buckets$name[[2]]))</pre>
 
 <pre >##                                          id
-## 1 rladies_example/iris.csv/1557432645147248
+## 1 rladies_example/iris.csv/1557433392904290
 ##                                                             selfLink
 ## 1 https://www.googleapis.com/storage/v1/b/rladies_example/o/iris.csv
 ##       name          bucket       generation metageneration contentType
-## 1 iris.csv rladies_example 1557432645147248              1    text/csv
+## 1 iris.csv rladies_example 1557433392904290              1    text/csv
 ##           timeCreated             updated   storageClass
-## 1 2019-05-09 20:10:45 2019-05-09 20:10:45 MULTI_REGIONAL
+## 1 2019-05-09 20:23:12 2019-05-09 20:23:12 MULTI_REGIONAL
 ##    timeStorageClassUpdated   size                  md5Hash
-## 1 2019-05-09T20:10:45.146Z 4.7 Kb iFpB0GOnkjro0OhATZKRow==
+## 1 2019-05-09T20:23:12.903Z 4.7 Kb iFpB0GOnkjro0OhATZKRow==
 ##                                                                                                           mediaLink
-## 1 https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557432645147248&amp;alt=media
+## 1 https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557433392904290&amp;alt=media
 ##     crc32c             etag componentCount contentLanguage
-## 1 c+bZLQ== CPC0zdygj+ICEAE=             NA              NA</pre>
+## 1 c+bZLQ== COLwlMGjj+ICEAE=             NA              NA</pre>
 
 </article></slide><slide class=""><hgroup><h2>⬇️ Downloading Objects</h2></hgroup><article  id="downloading-objects" class="smaller ">
 
@@ -402,7 +404,7 @@ head(gcs_eg_df)</pre>
   gcs_delete_bucket(new_bucket_name)
 }</pre>
 
-<pre >## 2019-05-09 16:10:39 -- Bucket rladies_example deleted successfully.</pre>
+<pre >## 2019-05-09 16:23:07 -- Bucket rladies_example deleted successfully.</pre>
 
 <pre >## [1] TRUE</pre>
 

@@ -19,6 +19,9 @@ library(emo)
 
 ![](images/gcp_homepage.png){ width=90% }
 
+Follow along at: https://github.com/MCDAngelo/connectGCP
+
+
 ## Google Cloud Platform {.build}
 
 Today I'll be focusing two parts of Google Cloud Platform that I've used to access data: Google Cloud Storage and BigQuery   
@@ -30,7 +33,7 @@ Today I'll be focusing two parts of Google Cloud Platform that I've used to acce
 #### BigQuery  
 - Set of tables that enables interactive analysis of massively large datasets working in conjunction with Google Storage
 - Can be accessed from R using the `bigrquery` package
- 
+
 
 ## Google Cloud Storage {.build}
 
