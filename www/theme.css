@@ -11,6 +11,10 @@ slides > slide > hgroup + article {
   margin-top: 10px;
 }
 
+slides > slide:not(.nobackground):after {
+  content: '';
+}
+
 .title-slide hgroup > h1{
   font-family: 'Oswald', 'Helvetica', sanserif; 
   font-size: 50px;
