@@ -251,7 +251,7 @@ library(googleCloudStorageR)</pre>
 
 <ul>
 <li><code>gcs_list_buckets</code>: will return a data frame with the buckets in your project</li>
-<li>Each bucket will have a name, storage class, location, and timestamp the bucket was last updated</li>
+<li>Each bucket will have a name, storage class, location, and time-stamp the bucket was last updated</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>## get your project ID by clicking on the name of it on GCP
@@ -293,15 +293,15 @@ buckets</pre>
 <pre class = 'prettyprint lang-r'>new_bucket_name &lt;- &quot;rladies_example&quot;
 gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&quot;)</pre>
 
-<pre >## 2019-05-09 14:42:01 -- Bucket created successfully:rladies_example in EU</pre>
+<pre >## 2019-05-09 16:10:36 -- Bucket created successfully:rladies_example in EU</pre>
 
 <pre >## ==Google Cloud Storage Bucket==
 ## Bucket:          rladies_example 
 ## Project Number:  826624791147 
 ## Location:        EU 
 ## Class:           MULTI_REGIONAL 
-## Created:         2019-05-09 18:42:08 
-## Updated:         2019-05-09 18:42:08 
+## Created:         2019-05-09 20:10:43 
+## Updated:         2019-05-09 20:10:43 
 ## Versioning:      FALSE 
 ## Meta-generation: 1 
 ## eTag:            CAE=</pre>
@@ -310,7 +310,7 @@ gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&q
 
 <pre >##              name   storageClass location             updated
 ## 1 mcd_test_bucket MULTI_REGIONAL       EU 2019-05-08 17:57:12
-## 2 rladies_example MULTI_REGIONAL       EU 2019-05-09 18:42:08</pre>
+## 2 rladies_example MULTI_REGIONAL       EU 2019-05-09 20:10:43</pre>
 
 </article></slide><slide class=""><hgroup><h2>⬆️ Uploading Objects to Buckets</h2></hgroup><article  id="uploading-objects-to-buckets" class="smaller ">
 
@@ -322,24 +322,24 @@ gcs_create_bucket(new_bucket_name, projectId = my_project, location = &quot;EU&q
 <pre class = 'prettyprint lang-r'>buckets &lt;- gcs_list_buckets(my_project)
 gcs_upload(iris, bucket = buckets$name[[2]])</pre>
 
-<pre >## 2019-05-09 14:42:02 -- File size detected as 4.7 Kb</pre>
+<pre >## 2019-05-09 16:10:36 -- File size detected as 4.7 Kb</pre>
 
 <pre >## ==Google Cloud Storage Object==
 ## Name:                iris.csv 
 ## Type:                text/csv 
 ## Size:                4.7 Kb 
-## Media URL:           https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557427330786310&amp;alt=media 
+## Media URL:           https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557432645147248&amp;alt=media 
 ## Download URL:        https://storage.cloud.google.com/rladies_example/iris.csv 
 ## Public Download URL: https://storage.googleapis.com/rladies_example/iris.csv 
 ## Bucket:              rladies_example 
-## ID:                  rladies_example/iris.csv/1557427330786310 
+## ID:                  rladies_example/iris.csv/1557432645147248 
 ## MD5 Hash:            iFpB0GOnkjro0OhATZKRow== 
 ## Class:               MULTI_REGIONAL 
-## Created:             2019-05-09 18:42:10 
-## Updated:             2019-05-09 18:42:10 
-## Generation:          1557427330786310 
+## Created:             2019-05-09 20:10:45 
+## Updated:             2019-05-09 20:10:45 
+## Generation:          1557432645147248 
 ## Meta Generation:     1 
-## eTag:                CIbIwvaMj+ICEAE= 
+## eTag:                CPC0zdygj+ICEAE= 
 ## crc32c:              c+bZLQ==</pre>
 
 </article></slide><slide class=""><hgroup><h2>🗃 Listing Objects</h2></hgroup><article  id="listing-objects" class="smaller ">
@@ -351,19 +351,19 @@ gcs_upload(iris, bucket = buckets$name[[2]])</pre>
 <pre class = 'prettyprint lang-r'>(objects &lt;- gcs_list_objects(bucket = buckets$name[[2]]))</pre>
 
 <pre >##                                          id
-## 1 rladies_example/iris.csv/1557427330786310
+## 1 rladies_example/iris.csv/1557432645147248
 ##                                                             selfLink
 ## 1 https://www.googleapis.com/storage/v1/b/rladies_example/o/iris.csv
 ##       name          bucket       generation metageneration contentType
-## 1 iris.csv rladies_example 1557427330786310              1    text/csv
+## 1 iris.csv rladies_example 1557432645147248              1    text/csv
 ##           timeCreated             updated   storageClass
-## 1 2019-05-09 18:42:10 2019-05-09 18:42:10 MULTI_REGIONAL
+## 1 2019-05-09 20:10:45 2019-05-09 20:10:45 MULTI_REGIONAL
 ##    timeStorageClassUpdated   size                  md5Hash
-## 1 2019-05-09T18:42:10.785Z 4.7 Kb iFpB0GOnkjro0OhATZKRow==
+## 1 2019-05-09T20:10:45.146Z 4.7 Kb iFpB0GOnkjro0OhATZKRow==
 ##                                                                                                           mediaLink
-## 1 https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557427330786310&amp;alt=media
+## 1 https://www.googleapis.com/download/storage/v1/b/rladies_example/o/iris.csv?generation=1557432645147248&amp;alt=media
 ##     crc32c             etag componentCount contentLanguage
-## 1 c+bZLQ== CIbIwvaMj+ICEAE=             NA              NA</pre>
+## 1 c+bZLQ== CPC0zdygj+ICEAE=             NA              NA</pre>
 
 </article></slide><slide class=""><hgroup><h2>⬇️ Downloading Objects</h2></hgroup><article  id="downloading-objects" class="smaller ">
 
@@ -402,7 +402,7 @@ head(gcs_eg_df)</pre>
   gcs_delete_bucket(new_bucket_name)
 }</pre>
 
-<pre >## 2019-05-09 14:42:05 -- Bucket rladies_example deleted successfully.</pre>
+<pre >## 2019-05-09 16:10:39 -- Bucket rladies_example deleted successfully.</pre>
 
 <pre >## [1] TRUE</pre>
 
@@ -480,18 +480,18 @@ head(gcs_eg_df)</pre>
 
 <ul>
 <li><p>When you run your first command with <code>bigrquery</code>, you will be prompted to authenticate.</p></li>
-<li><p>Note: to use <code>bigrquery</code> in a non-interactive session (i.e., when knitting a document like this presentation), you will need to keep a local file to cache the access credentials. (Select 1 below)</p></li>
+<li><p>Note: to use <code>bigrquery</code> in a non-interactive session (i.e., when knitting a document), you will need to keep a local file to cache the access credentials. (Select 1 below)</p></li>
 </ul>
 
 <img width="900px" src='images/auth_01.png' title='fig:'/>
 
-</article></slide><slide class=""><hgroup><h2>🔐 Authentication with <code>bigrquery</code></h2></hgroup><article  id="authentication-with-bigrquery-1" class="smaller columns-3">
+</article></slide><slide class=""><hgroup><h2>🔐 Authentication with <code>bigrquery</code></h2></hgroup><article  id="authentication-with-bigrquery-1" class="smaller ">
 
-<img width="350px" src='images/auth_02.png' title='fig:'/>
-
-<p><img width="350px" src='images/auth_03.png' title=''/> <img width="350px" src='images/auth_04.png' title=''/></p>
+<img width="100%" src='images/bq_auth_seq.png' title='fig:'/>
 
 </article></slide><slide class=""><hgroup><h2>🔐 Authentication with <code>bigrquery</code></h2></hgroup><article  id="authentication-with-bigrquery-2" class="smaller ">
+
+<p>Paste the authentication code you just copied into R.</p>
 
 <img width="900px" src='images/auth_05.png#center' title='fig:'/>
 
@@ -587,7 +587,7 @@ bq_table_exists(my_bq_table_info)</pre>
 
 <ul>
 <li><code>bq_project_query()</code>: Submits a query, waits for it to complete, and returns a <code>bq_table</code></li>
-<li><code>bq_table_download()</code>: Retrieves rows from a <code>bq_table</code> object, can specify <code>page_size</code> for retrieval in chunks (useful for large tables, default is 10,000)</li>
+<li><code>bq_table_download()</code>: Retrieves rows from a <code>bq_table</code> object, can specify <code>page_size</code> for retrieval in chunks (useful for large tables, default is 10,000 rows)</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>library(glue)
@@ -637,8 +637,9 @@ head(dbi_eg_df)</pre>
 </article></slide><slide class=""><hgroup><h2><code>dplyr</code> Interface</h2></hgroup><article  id="dplyr-interface" class="smaller ">
 
 <ul>
-<li><code>tbl()</code>: create a table from a data source (here: BigQuery)</li>
-<li>Uses <code>dbplyr</code> to use BigQuery tables as if they are in-memory data frames, automatically converts dplyr code into SQL</li>
+<li><code>tbl()</code>: create a table from a data source (in our case: BigQuery)</li>
+<li><code>dbplyr</code> is used to access BigQuery tables as if they are in-memory data frames, automatically converts dplyr code into SQL</li>
+<li><em>Note</em>: This does not actually execute the query, <code>nrow()</code> gives <code>NA</code> and the class is a lazy connection</li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>library(dplyr); library(dbplyr)
@@ -656,7 +657,6 @@ nrow(dplyr_query)</pre>
 ## [5] &quot;tbl&quot;</pre>
 
 <ul>
-<li>Does not actually execute the query: <code>nrow()</code> gives <code>NA</code> and the class is a lazy connection</li>
 <li>Helpful vignette from <code>dbplyr</code> can be found <a href='https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html' title=''>here</a></li>
 </ul>
 
@@ -664,7 +664,7 @@ nrow(dplyr_query)</pre>
 
 <ul>
 <li><code>collect()</code>: retrieves data into a local tibble</li>
-<li>We can now see the number of rows and that the output is a <code>data.frame</code>/<code>tbl</code></li>
+<li>We can now see the number of rows and that the output is a <code>data.frame</code></li>
 </ul>
 
 <pre class = 'prettyprint lang-r'>dplyr_eg_df &lt;- collect(dplyr_query)
@@ -708,9 +708,13 @@ nrow(dplyr_eg_df)</pre>
 
 <img width="500px" src='images/thank_you_slide.jpg' title='fig:'/>
 
-<p>Any Questions?</p>
+<p><br></p>
 
-<p>Connect with me on Twitter! <code>@mariacdangelo</code> 🐦</p>
+<h3>Any Questions?</h3>
+
+<p><br></p>
+
+<h4>🐦 Connect with me on Twitter! <code>@mariacdangelo</code></h4>
 
 </article></slide><slide class=""><hgroup><h2></h2></hgroup><article  id="section" class="smaller ">
 
@@ -745,11 +749,9 @@ nrow(dplyr_eg_df)</pre>
 # Authenticate ClientID
 googleAuthR::gar_set_client(&quot;client-id.json&quot;, scopes = scope)</pre>
 
-</article></slide><slide class=""><hgroup><h2>App Authentication with <code class="columns-3">googleCloudStorageR</code></h2></hgroup><article  id="app-authentication-with-googlecloudstorager-6" class="smaller ">
+</article></slide><slide class=""><hgroup><h2>App Authentication with <code>googleCloudStorageR</code></h2></hgroup><article  id="app-authentication-with-googlecloudstorager-6" class="smaller ">
 
-<p><img width="350px" src='images/gcs_auth_08.png' title=''/> <img width="350px" src='images/gcs_auth_09.png' title=''/></p>
-
-<img width="350px" src='images/gcs_auth_10.png' title='fig:'/></article></slide>
+<img width="100%" src='images/gcs_auth_seq.png' title='fig:'/></article></slide>
 
 
   <slide class="backdrop"></slide>

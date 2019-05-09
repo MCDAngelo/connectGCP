@@ -137,7 +137,7 @@ library(googleCloudStorageR)
 ## `r emo::ji("card_file_box")` Listing Buckets 
 
 - `gcs_list_buckets`: will return a data frame with the buckets in your project
-- Each bucket will have a name, storage class, location, and timestamp the bucket was last updated
+- Each bucket will have a name, storage class, location, and time-stamp the bucket was last updated
 
 ```{r}
 ## get your project ID by clicking on the name of it on GCP
@@ -271,23 +271,21 @@ if(new_bucket_name %in% buckets$name){
 
 - When you run your first command with `bigrquery`, you will be prompted to authenticate.
 
-- Note: to use `bigrquery` in a non-interactive session (i.e., when knitting a document like this presentation), you will need to keep a local file to cache the access credentials. (Select 1 below)
+- Note: to use `bigrquery` in a non-interactive session (i.e., when knitting a document), you will need to keep a local file to cache the access credentials. (Select 1 below)
 
 
 ![](images/auth_01.png){ width=900px }
 
 
-## `r emo::ji("closed_lock_with_key")` Authentication with `bigrquery` {.columns-3}
+## `r emo::ji("closed_lock_with_key")` Authentication with `bigrquery`
 
 
-![](images/auth_02.png){ width=350px }
-
-![](images/auth_03.png){ width=350px }
-![](images/auth_04.png){ width=350px }
+![](images/bq_auth_seq.png){ width=100% }
 
 
 ## `r emo::ji("closed_lock_with_key")` Authentication with `bigrquery`
 
+Paste the authentication code you just copied into R.
 
 ![](images/auth_05.png#center){ width=900px }
 
@@ -365,7 +363,7 @@ as_bq_fields(ToothGrowth)
 ## `r emo::ji("arrow_down")` Downloading Tables
 
 - `bq_project_query()`: Submits a query, waits for it to complete, and returns a `bq_table`
-- `bq_table_download()`: Retrieves rows from a `bq_table` object, can specify `page_size` for retrieval in chunks (useful for large tables, default is 10,000)
+- `bq_table_download()`: Retrieves rows from a `bq_table` object, can specify `page_size` for retrieval in chunks (useful for large tables, default is 10,000 rows)
 
 ```{r cars, warning=FALSE, message=FALSE}
 library(glue)
@@ -396,9 +394,9 @@ DBI::dbDisconnect(con)
 
 ## `dplyr` Interface
 
-- `tbl()`: create a table from a data source (here: BigQuery)
-- Uses `dbplyr` to use BigQuery tables as if they are in-memory data frames,  automatically converts dplyr code into SQL
-
+- `tbl()`: create a table from a data source (in our case: BigQuery)
+- `dbplyr` is used to access BigQuery tables as if they are in-memory data frames,  automatically converts dplyr code into SQL
+- *Note*: This does not actually execute the query, `nrow()` gives `NA` and the class is a lazy connection
 
 ```{r, warning=FALSE, message=FALSE}
 library(dplyr); library(dbplyr)
@@ -408,13 +406,13 @@ dplyr_query <- dplyr_eg %>% group_by(supp, dose) %>% count()
 nrow(dplyr_query)
 class(dplyr_query)
 ```
-- Does not actually execute the query: `nrow()` gives `NA` and the class is a lazy connection
+
 - Helpful vignette from `dbplyr` can be found [here](https://cran.r-project.org/web/packages/dbplyr/vignettes/dbplyr.html)
 
 ## `dplyr` Interface
 
 - `collect()`: retrieves data into a local tibble
-- We can now see the number of rows and that the output is a `data.frame`/`tbl`
+- We can now see the number of rows and that the output is a `data.frame`
 
 
 ```{r, warning=FALSE, message=FALSE}
@@ -443,9 +441,13 @@ if (bq_table_exists(my_bq_table_info)){
 
 ![](images/thank_you_slide.jpg){ width=500px }
 
-Any Questions? 
+<br> 
 
-Connect with me on Twitter! `@mariacdangelo` `r emo::ji("bird")`
+### Any Questions? 
+
+<br> 
+
+#### `r emo::ji("bird")` Connect with me on Twitter! `@mariacdangelo`
 
 
 
@@ -490,9 +492,7 @@ googleAuthR::gar_set_client("client-id.json", scopes = scope)
 ```
 
 
-## App Authentication with `googleCloudStorageR`{.columns-3}
+## App Authentication with `googleCloudStorageR`
 
-![](images/gcs_auth_08.png){ width=350px }
-![](images/gcs_auth_09.png){ width=350px }
+![](images/gcs_auth_seq.png){ width=100% }
 
-![](images/gcs_auth_10.png){ width=350px }
